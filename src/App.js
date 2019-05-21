@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import routes from './routes';
 import "./styles/index.css";
+import 'react-animated-slider/build/horizontal.css';
 
 function App() {
   return (
