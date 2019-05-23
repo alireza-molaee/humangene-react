@@ -1,0 +1,12 @@
+.section-header {
+    display: block;
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.section-header > .section-header__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

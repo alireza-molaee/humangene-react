@@ -29,7 +29,7 @@ const content = [
 export default function MySlider() {
   return (
     <div>
-      <Slider duration={700}>
+      <Slider duration={700} autoplay={3000}>
         {content.map((article, index) => (
           <Slide key={`slide-${index}`} {...article} />
         ))}
