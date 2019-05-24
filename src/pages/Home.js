@@ -124,7 +124,7 @@ export default class Home extends Component {
     const renderedServices = this.renderServices();
 
     return (
-      <div className="home-page">
+      <div id="home-page">
         <Helmet>
             <title>Home</title>
         </Helmet>

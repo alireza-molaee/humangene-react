@@ -1,25 +1,25 @@
-.home-page {
+#home-page {
     padding-top: 0;
 }
 
-.features-section {
+#home-page .features-section {
     padding: 50px 40px 50px 40px;
 }
 
-.service-section {
+#home-page .service-section {
     padding: 20px 40px 50px 40px;
 }
 
-.service-section > .row{
+#home-page .service-section > .row{
     flex-wrap: wrap-reverse;
 }
 
-.about-section {
+#home-page .about-section {
     padding: 20px 40px 50px 40px;
     background-color: #c4cacc;
 }
 
-.about-section .about-section__text {
+#home-page .about-section .about-section__text {
     direction: rtl;
     font-size: 18px;
     text-align: justify;
@@ -28,7 +28,7 @@
     color: #1d1d1d;
 }
 
-.about-section .about-section__button-wrapper {
+#home-page .about-section .about-section__button-wrapper {
     text-align: center;
     margin-bottom: 30px;
     margin-top: 40px;
@@ -37,12 +37,12 @@
 /* .about-section .about-section__button {
 } */
 
-.companies-section {
+#home-page .companies-section {
     padding: 20px 40px 50px 40px;
 }
 
 @media only screen and (max-width: 64em) {
-    .home-page {
+    #home-page {
         padding-top: 55px;
     }
 }
