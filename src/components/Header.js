@@ -38,8 +38,15 @@ export default class Header extends React.Component {
       <Fragment>
         <header ref={this.headerRef} className={isSticky ? "header" : "header sticky"}>
           <div class="container header__content">
-            <Link to="/">
+            <Link className="header__logo-link" to="/">
               <img className="header__logo" src={logo} alt={'logo'} />
+              <svg height="0" width="0">
+                  <defs>
+                      <clipPath id="hex-logo" transform="scale(0.75)">
+                          <path d="M59 2.8867513459481a10 10 0 0 1 10 0l45.425625842204 26.226497308104a10 10 0 0 1 5 8.6602540378444l0 52.452994616207a10 10 0 0 1 -5 8.6602540378444l-45.425625842204 26.226497308104a10 10 0 0 1 -10 0l-45.425625842204 -26.226497308104a10 10 0 0 1 -5 -8.6602540378444l0 -52.452994616207a10 10 0 0 1 5 -8.6602540378444"></path>
+                      </clipPath>
+                  </defs>
+              </svg>
             </Link>
             <nav className="header__nav-bar">
               <NavLink className="header__nav-bar__item" to="/" activeClassName="active">خانه</NavLink>

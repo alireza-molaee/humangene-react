@@ -1,0 +1,28 @@
+.company {
+    height: 70px;
+    width: auto;
+    opacity: 0.8;
+}
+
+.company:hover {
+    opacity: 1;
+}
+
+.company .company__link {
+    text-decoration: none;
+}
+
+.company .company__image {
+    height: 100%;
+    width: auto;
+    display: inline-block;
+}
+
+.company-list {
+    text-align: center;
+}
+
+.company-list .company-list__item {
+    display: inline-block;
+    margin: 10px 20px;
+}

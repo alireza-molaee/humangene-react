@@ -1,0 +1,21 @@
+.btn {
+    padding: 14px 24px;
+    height: 12px;
+    line-height: 12px;
+    font-size: 12px;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #00C958;
+    text-decoration: none;
+    border: none;
+    outline: none;
+} 
+
+.btn--secondary {
+    color: #fff;
+    background-color: #000;
+}
+
+.btn--secondary:hover, .btn--secondary:focus {
+    background-color: #f97352;
+}

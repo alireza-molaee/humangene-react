@@ -6,6 +6,41 @@
     padding: 50px 40px 50px 40px;
 }
 
+.service-section {
+    padding: 20px 40px 50px 40px;
+}
+
+.service-section > .row{
+    flex-wrap: wrap-reverse;
+}
+
+.about-section {
+    padding: 20px 40px 50px 40px;
+    background-color: #c4cacc;
+}
+
+.about-section .about-section__text {
+    direction: rtl;
+    font-size: 18px;
+    text-align: justify;
+    line-height: 1.8em;
+    padding: 0 50px;
+    color: #1d1d1d;
+}
+
+.about-section .about-section__button-wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+/* .about-section .about-section__button {
+} */
+
+.companies-section {
+    padding: 20px 40px 50px 40px;
+}
+
 @media only screen and (max-width: 64em) {
     .home-page {
         padding-top: 55px;

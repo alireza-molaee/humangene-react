@@ -5,7 +5,37 @@ import Slider from '../components/Slider';
 import Feature from '../components/Feature';
 import SectionHeader from '../components/SectionHeader';
 import Service from '../components/Service';
+import CompanyList from '../components/CompanyList'
+import Footer from '../components/Footer';
 
+
+const companies = [
+  {
+    title: 'دانشگاه علوم پزشکی شهید بهشتی',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png',
+    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
+  },
+  {
+    title: 'پژوهشکده جهاد دانشگاهی معتمد',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/57431303.jpg',
+    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
+  },
+  {
+    title: 'آزمایشگاه نیلو',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/logo1.png',
+    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
+  },
+  {
+    title: 'آزمایشگاه پارسه',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/parseh-lab-logo.jpg',
+    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
+  },
+  {
+    title: 'مرکز فوق تخصصی متابولیک دانشگاه علوم پزشکی تهران',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/download.jpg',
+    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
+  },
+]
 
 const features = [
   {
@@ -28,41 +58,45 @@ const features = [
 const services = [
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
   {
     title: 'تحلیل داده‌های خام زیستی',
-    image: 'car.png',
+    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
     link: 'google.com'
   },
 ]
+
+const aboutSummeryText = `
+شرکت هومن ژن پارس، از سال ۱۳۹۵ تحت عنوان مرکز خدمات امیکس شریف (مستقر در دانشگاه صنعتی شریف) توسط جمعی از متخصصین بایوانفورماتیک، بیوشیمی و ژنتیک فعالیت خود را در زمینه ارائه خدمات تحلیل داده‌های حجیم زیستی و توالی یابی نسل جدید آغاز نموده است. این مرکز در حال حاضر در حال پیاده‌سازی سیستم جامع ذخیره و تحلیل داده‌های زیستی برای کاربران تخصصی از جمله دانشجویان، مراکز تحقیقاتی و آزمایشگاه ها و پزشکان حوزه ژنتیک است که نمونه پیش صنعتی این محصول آماده بهره‌برداری می‌باشد.
+`
 
 export default class Home extends Component {
   renderFeatures() {
@@ -79,7 +113,7 @@ export default class Home extends Component {
     return services.map((item, index) => {
       return (
         <div className="col-sm-4">
-          <Service {...item} backgroundColorIndex={(index % 3) + 1}/>
+          <Service {...item} indexInRow={(index % 3) + 1}/>
         </div>
       )
     })
@@ -102,12 +136,30 @@ export default class Home extends Component {
             {renderedFeatures}
           </div>
         </section>
-        <section>
+        <section className="service-section container-fluid">
           <SectionHeader>خدمات ما</SectionHeader>
           <div className="row around-xs">
             {renderedServices}
           </div>
         </section>
+        <section className="about-section container-fluid">
+          <SectionHeader secondary>هومن ژن پارس</SectionHeader>
+          <div className="container">
+            <p className="about-section__text">
+              {aboutSummeryText}
+            </p>
+            <div className="about-section__button-wrapper">
+              <a href="" className="about-section__button btn btn--secondary">بیشتر بدانید</a>
+            </div>
+          </div>
+        </section>
+        <section className="companies-section container-fluid">
+          <SectionHeader>همکاران ما</SectionHeader>
+          <div>
+            <CompanyList companies={companies} />
+          </div>
+        </section>
+        <Footer />
       </div>
     )
   }

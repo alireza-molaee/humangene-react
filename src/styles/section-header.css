@@ -10,3 +10,11 @@
     font-weight: 700;
     margin-bottom: 10px;
 }
+
+.section-header--secondary .section-header__title {
+    color: #f97352;
+}
+
+.section-header--secondary .divider {
+    background-color: black;
+}
