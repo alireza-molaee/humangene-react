@@ -1,6 +1,6 @@
 .btn {
     padding: 14px 24px;
-    height: 12px;
+    height: 40px;
     line-height: 12px;
     font-size: 12px;
     border-radius: 3px;
@@ -9,7 +9,18 @@
     text-decoration: none;
     border: none;
     outline: none;
-} 
+}
+
+.btn:hover {
+    background-color: #315AB6;
+}
+
+.btn--md {
+    padding: 16px 25px;
+    height: 44px;
+    line-height: 16px;
+    font-size: 16px;
+}
 
 .btn--secondary {
     color: #fff;

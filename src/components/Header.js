@@ -49,10 +49,10 @@ export default class Header extends React.Component {
               </svg>
             </Link>
             <nav className="header__nav-bar">
-              <NavLink className="header__nav-bar__item" to="/" activeClassName="active">خانه</NavLink>
+              <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
               <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
               <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
-              <NavLink className="header__nav-bar__item" to="/contact-us" activeClassName="active">تماس با ما</NavLink>
+              <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
             </nav>
           </div>
         </header>

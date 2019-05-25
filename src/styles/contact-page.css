@@ -1,3 +1,29 @@
 #contact-page {
     padding-top: 55px;
 }
+
+#contact-page > main {
+    padding: 80px 0;
+}
+
+#contact-page .input-textarea {
+    height: 150px;
+}
+
+.form-btn-wrapper {
+    text-align: center;
+}
+
+.contact-detail {
+    direction: rtl;
+}
+
+.contact-detail .contact-detail__item {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.contact-detail .contact-detail__item strong {
+    color: #00C958;
+}
