@@ -1,0 +1,9 @@
+#about-page main {
+    padding: 100px 0;
+}
+
+#about-page .text {
+    padding: 100px 200px;
+    text-align: justify;
+    direction: rtl;
+}

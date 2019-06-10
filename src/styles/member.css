@@ -1,0 +1,34 @@
+.member-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-card .member-card__image {
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.member-card .member-card__name {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    padding-top: 10px;
+}
+
+.member-card .member-card__job {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    padding-top: 10px;    
+}
+
+.member-card .member-card__description {
+    text-align: center;
+    font-size: 100%;
+    padding: 15px 0;    
+}
+
+.member-card .member-card__email {
+    text-align: center;
+}

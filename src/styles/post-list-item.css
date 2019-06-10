@@ -1,0 +1,36 @@
+.post-list-item {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    transition: transform 500ms ease-out;
+}
+
+.post-list-item:hover {
+    transform: translateY(-20px);
+}
+
+.post-list-item .post-list-item__image {
+    width: 100%;
+    height: auto;
+}
+
+.post-list-item .post-list-item__title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    padding: 6px 15px;
+    font-size: 22px;
+    line-height: 23px;
+}
+
+.post-list-item .post-list-item__category {
+    position: absolute;
+    bottom: 35px;
+    right: 10px;
+    background-color: #F97352;
+    padding: 5px 10px;
+    font-size: 15px;
+    line-height: 16px;
+}
