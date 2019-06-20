@@ -7,6 +7,7 @@ import SectionHeader from '../components/SectionHeader';
 import Service from '../components/Service';
 import CompanyList from '../components/CompanyList'
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 
 const companies = [
@@ -149,7 +150,7 @@ export default class Home extends Component {
               {aboutSummeryText}
             </p>
             <div className="about-section__button-wrapper">
-              <a href="" className="about-section__button btn btn--secondary">بیشتر بدانید</a>
+              <Link to="/about-us" className="about-section__button btn btn--secondary">بیشتر بدانید</Link>
             </div>
           </div>
         </section>

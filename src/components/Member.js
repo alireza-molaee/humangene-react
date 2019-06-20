@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Member(props) {
     return (
         <div className="member-card">
-            <img className="member-card__image" src={props.image} />
+            <img className="member-card__image" src={props.image} alt={props.name} />
             <h4 className="member-card__name">{props.name}</h4>
             <h5 className="member-card__job">{props.job}</h5>
             <p className="member-card__description">{props.description}</p>
