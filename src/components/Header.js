@@ -1,20 +1,37 @@
 import React, { createRef, Fragment } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import logo from '../assets/logo.png';
+import { getHeaderItems } from '../utils/api';
+import LoaddingPage from './LoaddingPage';
 
 
 export default class Header extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading: true,
+      headerItems: [],
+    }
     this.headerRef = createRef();
-    this.onScroll = this.onScroll.bind(this)
+    this.onScroll = this.onScroll.bind(this);
+    this.renderPageLinks = this.renderPageLinks.bind(this);
   }
 
   componentDidMount() {
     if (this.props.isSticky) {
       window.addEventListener('scroll', this.onScroll);
     }
+    getHeaderItems()
+    .then(data => {
+      this.setState({headerItems: data,});
+    })
+    .catch(err => {
+      console.error('error', err);
+    })
+    .then(() => {
+      this.setState({isLoading: false});
+    })
   }
 
   componentWillUnmount() {
@@ -32,12 +49,40 @@ export default class Header extends React.Component {
     }
   }
 
+  renderPageLinks() {
+    return this.state.headerItems.map(item => {
+      if (item.link) {
+        return <NavLink className="header__nav-bar__item" to={item.link} exact activeClassName="active">{item.title}</NavLink>
+      } else if (item.items) {
+        return (<div className="item-group">
+          <span className="item-group__title">{item.title}</span>
+          <ul className="item-group__sub-menu">
+            {
+              item.items.map(subItem => {
+                return (
+                  <li className="item-group__sub-menu__item">
+                    <NavLink className="item-group__sub-menu__item__link" to={subItem.link} exact activeClassName="active">{subItem.title}</NavLink>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>)
+      }
+    })
+  }
+
   render() {
     const { isSticky } = this.props;
+
+    if (this.state.isLoading) {
+      return <LoaddingPage />
+    }
+
     return (
       <Fragment>
         <header ref={this.headerRef} className={isSticky ? "header" : "header sticky"}>
-          <div class="container header__content">
+          <div className="container header__content">
             <Link className="header__logo-link" to="/">
               <img className="header__logo" src={logo} alt={'logo'} />
               <svg height="0" width="0">
@@ -50,6 +95,7 @@ export default class Header extends React.Component {
             </Link>
             <nav className="header__nav-bar">
               <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
+              {this.renderPageLinks()}
               <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
               <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
               <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>

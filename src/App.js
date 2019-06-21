@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import routes from './routes';
 import 'react-animated-slider/build/horizontal.css';
 import "./styles/index.css";
+import LoaddingPage from './components/LoaddingPage'
 
 function App() {
   return (
@@ -12,11 +13,11 @@ function App() {
         <title>Human Gene</title>
       </Helmet>
       <Router>
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<LoaddingPage />}>
           <Switch>
             {
-              routes.map(route => {
-                return <Route path={route.path} exact component={route.component} />
+              routes.map((route, index) => {
+                return <Route key={`route-${index}`} path={route.path} exact component={route.component} />
               })
             }
             <Redirect to="/" />

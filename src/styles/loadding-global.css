@@ -1,0 +1,19 @@
+.loading-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 10000;
+}
+
+.loading-global img {
+    margin-bottom: 50px;
+}
