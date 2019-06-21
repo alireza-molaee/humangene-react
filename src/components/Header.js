@@ -50,17 +50,17 @@ export default class Header extends React.Component {
   }
 
   renderPageLinks() {
-    return this.state.headerItems.map(item => {
+    return this.state.headerItems.map((item, indexItem) => {
       if (item.link) {
-        return <NavLink className="header__nav-bar__item" to={item.link} exact activeClassName="active">{item.title}</NavLink>
+        return <NavLink key={`header-item-${indexItem}`} className="header__nav-bar__item" to={item.link} exact activeClassName="active">{item.title}</NavLink>
       } else if (item.items) {
-        return (<div className="item-group">
+        return (<div key={`header-item-${indexItem}`} className="item-group">
           <span className="item-group__title">{item.title}</span>
           <ul className="item-group__sub-menu">
             {
-              item.items.map(subItem => {
+              item.items.map((subItem, indexSub) => {
                 return (
-                  <li className="item-group__sub-menu__item">
+                  <li key={`header-item-${indexItem}-sub-${indexSub}`} className="item-group__sub-menu__item">
                     <NavLink className="item-group__sub-menu__item__link" to={subItem.link} exact activeClassName="active">{subItem.title}</NavLink>
                   </li>
                 )
@@ -68,6 +68,8 @@ export default class Header extends React.Component {
             }
           </ul>
         </div>)
+      } else {
+        return '';
       }
     })
   }

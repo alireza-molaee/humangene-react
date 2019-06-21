@@ -60,3 +60,11 @@ export function getHeaderItems() {
         return headerItems;
     }));
 }
+
+export function getArticleDetail(id) {
+    return ajaxJson.get(`/cms/page/${id}/`)
+    .then(res => {
+        console.log(res.data);
+        return res.data;
+    })
+}
