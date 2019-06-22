@@ -64,7 +64,13 @@ export function getHeaderItems() {
 export function getArticleDetail(id) {
     return ajaxJson.get(`/cms/page/${id}/`)
     .then(res => {
-        console.log(res.data);
-        return res.data;
+        return {
+            id: res.data['id'],
+            title: res.data['title_fa'],
+            image: res.data['image'],
+            content: res.data['text_fa'],
+            createdAt: res.data['published_date'],
+            categoryId: res.data['category'],
+        };
     })
 }
