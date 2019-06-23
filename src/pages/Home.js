@@ -47,7 +47,7 @@ export default class Home extends Component {
   renderFeatures() {
     return this.state.features.map((item, index) => {
       return (
-        <div className="col-sm-4">
+        <div key={`feature-${index}`} className="col-sm-4">
           <Feature {...item} indexInRow={(index % 3) + 1}/>
         </div>
       )
@@ -57,7 +57,7 @@ export default class Home extends Component {
   renderServices() {
     return this.state.services.map((item, index) => {
       return (
-        <div className="col-sm-4">
+        <div key={`service-${index}`} className="col-sm-4">
           <Service {...item} indexInRow={(index % 3) + 1}/>
         </div>
       )

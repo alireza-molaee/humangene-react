@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import renderHTML from 'react-render-html';
+import { Formik } from 'formik';
+import { postContactForm } from '../utils/api'
 
 const contact = {
   address: `تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم`,
@@ -14,6 +16,14 @@ const contact = {
 }
 
 export default class Contact extends Component {
+
+  handleSubmitForm(values, { setSubmitting }) {
+    postContactForm(values)
+    .then(() => {
+      setSubmitting(false);
+    })
+  }
+
   render() {
     return (
       <div id="contact-page">
@@ -25,23 +35,59 @@ export default class Contact extends Component {
         <main className="container">
           <div className="row">
             <div className="col-md-6">
-              <form>
-                <div className="input-group input-group-icon">
-                  <input type="text" className="input-text" name="name" placeholder="نام شما" />
-                  <div class="input-icon"><FontAwesomeIcon icon="user" /></div>
-                </div>
-                <div className="input-group input-group-icon">
-                  <input type="email" className="input-text" name="email" placeholder="ایمیل شما" />
-                  <div class="input-icon"><FontAwesomeIcon icon="envelope" /></div>
-                </div>
-                <div className="input-group input-group-icon">
-                  <textarea className="input-textarea" placeholder="متن پیام"></textarea>
-                  <div class="input-icon"><FontAwesomeIcon icon="pen" /></div>
-                </div>
-                <div className="form-btn-wrapper">
-                  <button className="btn btn--md" type="submit">ارسال</button>
-                </div>
-              </form>
+              <Formik
+                initialValues={{ name: '', email: '', text: '' }}
+                onSubmit={this.handleSubmitForm}
+              >
+               {({
+                values,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+              }) => (
+                <form onSubmit={handleSubmit}>
+                  <div className="input-group input-group-icon">
+                    <input
+                      type="text"
+                      className="input-text"
+                      name="name"
+                      placeholder="نام شما"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                    />
+                    <div className="input-icon"><FontAwesomeIcon icon="user" /></div>
+                  </div>
+                  <div className="input-group input-group-icon">
+                    <input
+                      type="email"
+                      className="input-text"
+                      name="email"
+                      placeholder="ایمیل شما"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                    <div className="input-icon"><FontAwesomeIcon icon="envelope" /></div>
+                  </div>
+                  <div className="input-group input-group-icon">
+                    <textarea
+                      className="input-textarea"
+                      name="text"
+                      placeholder="متن پیام"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.text}
+                    ></textarea>
+                    <div className="input-icon"><FontAwesomeIcon icon="pen" /></div>
+                  </div>
+                  <div className="form-btn-wrapper">
+                    <button className="btn btn--md" type="submit" disabled={isSubmitting}>ارسال</button>
+                  </div>
+                </form>
+              )}
+              </Formik>
             </div>
             <div className="col-md-6">
               <div className="contact-detail">

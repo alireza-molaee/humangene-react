@@ -39,9 +39,9 @@ export default class About extends Component {
   }
   
   renderMembers () {
-    return this.state.members.map((item) => {
+    return this.state.members.map((item, index) => {
       return (
-        <div className="col-xs-12 col-md-4">
+        <div key={`member-${index}`} className="col-xs-12 col-md-4">
           <Member {...item} />
         </div>
       )

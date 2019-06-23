@@ -368,3 +368,12 @@ export function getMemberData() {
     }, 2000)
   })
 }
+
+export function postContactForm(data) {
+  console.log(data);
+  return new Promise(res => {
+    setTimeout(() => {
+      res();
+    }, 2000)
+  })
+}
