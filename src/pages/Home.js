@@ -7,101 +7,45 @@ import SectionHeader from '../components/SectionHeader';
 import Service from '../components/Service';
 import CompanyList from '../components/CompanyList'
 import Footer from '../components/Footer';
+import LoaddingPage from '../components/LoaddingPage'
 import { Link } from 'react-router-dom';
+import { getHomeData } from '../utils/api'
 
-
-const companies = [
-  {
-    title: 'دانشگاه علوم پزشکی شهید بهشتی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png',
-    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-  },
-  {
-    title: 'پژوهشکده جهاد دانشگاهی معتمد',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/57431303.jpg',
-    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-  },
-  {
-    title: 'آزمایشگاه نیلو',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/logo1.png',
-    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-  },
-  {
-    title: 'آزمایشگاه پارسه',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/parseh-lab-logo.jpg',
-    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-  },
-  {
-    title: 'مرکز فوق تخصصی متابولیک دانشگاه علوم پزشکی تهران',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/download.jpg',
-    link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-  },
-]
-
-const features = [
-  {
-    title: 'ارائه‌ی خدمات در کمترین زمان',
-    icon: 'car',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-  },
-  {
-    title: 'ارائه‌ی خدمات در کمترین زمان',
-    icon: 'car',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-  },
-  {
-    title: 'ارائه‌ی خدمات در کمترین زمان',
-    icon: 'car',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-  },
-]
-
-const services = [
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-  {
-    title: 'تحلیل داده‌های خام زیستی',
-    image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-    link: 'google.com'
-  },
-]
 
 const aboutSummeryText = `
 شرکت هومن ژن پارس، از سال ۱۳۹۵ تحت عنوان مرکز خدمات امیکس شریف (مستقر در دانشگاه صنعتی شریف) توسط جمعی از متخصصین بایوانفورماتیک، بیوشیمی و ژنتیک فعالیت خود را در زمینه ارائه خدمات تحلیل داده‌های حجیم زیستی و توالی یابی نسل جدید آغاز نموده است. این مرکز در حال حاضر در حال پیاده‌سازی سیستم جامع ذخیره و تحلیل داده‌های زیستی برای کاربران تخصصی از جمله دانشجویان، مراکز تحقیقاتی و آزمایشگاه ها و پزشکان حوزه ژنتیک است که نمونه پیش صنعتی این محصول آماده بهره‌برداری می‌باشد.
 `
 
 export default class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      slids: [],
+      features: [],
+      services: [],
+      companies: [],
+      isLoadding: true,
+    }
+  }
+
+  componentDidMount() {
+    getHomeData()
+    .then(data => {
+      this.setState({
+        ...data
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .then(() => {
+      this.setState({isLoadding: false});
+    })
+  }
+
   renderFeatures() {
-    return features.map((item, index) => {
+    return this.state.features.map((item, index) => {
       return (
         <div className="col-sm-4">
           <Feature {...item} indexInRow={(index % 3) + 1}/>
@@ -111,7 +55,7 @@ export default class Home extends Component {
   }
 
   renderServices() {
-    return services.map((item, index) => {
+    return this.state.services.map((item, index) => {
       return (
         <div className="col-sm-4">
           <Service {...item} indexInRow={(index % 3) + 1}/>
@@ -121,6 +65,18 @@ export default class Home extends Component {
   }
   
   render() {
+
+    if (this.state.isLoadding) {
+      return (
+        <div id="home-page">
+          <Helmet>
+              <title>Home</title>
+          </Helmet>
+          <LoaddingPage />
+        </div>
+      )
+    }
+
     const renderedFeatures = this.renderFeatures();
     const renderedServices = this.renderServices();
 
@@ -130,7 +86,7 @@ export default class Home extends Component {
             <title>Home</title>
         </Helmet>
         <Header isSticky />
-        <Slider />
+        <Slider slids={this.state.slids} />
         <div class="divider divider--full-width divider--gradient"></div>
         <section className="features-section container-fluid">
           <div className="row around-xs">
@@ -157,7 +113,7 @@ export default class Home extends Component {
         <section className="companies-section container-fluid">
           <SectionHeader>همکاران ما</SectionHeader>
           <div>
-            <CompanyList companies={companies} />
+            <CompanyList companies={this.state.companies} />
           </div>
         </section>
         <Footer />

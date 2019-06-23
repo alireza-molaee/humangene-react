@@ -17,3 +17,9 @@
 .loading-global img {
     margin-bottom: 50px;
 }
+
+.page-loadin-wrapper {
+    text-align: center;
+    width: 100%;
+    padding: 100px;
+}

@@ -4,6 +4,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import renderHTML from 'react-render-html';
+
+const contact = {
+  address: `تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم`,
+  telephone: '66033184-021',
+  postalcode: '1459973761',
+  email: 'info@humangene.ir',
+}
 
 export default class Contact extends Component {
   render() {
@@ -39,19 +47,19 @@ export default class Contact extends Component {
               <div className="contact-detail">
                 <p className="contact-detail__item">
                 <strong><FontAwesomeIcon icon="map-marked" />&nbsp;آدرس:&nbsp;</strong>
-                تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم
+                  {renderHTML(contact.address)}
                 </p>
                 <p className="contact-detail__item">
                   <strong><FontAwesomeIcon icon="phone" />&nbsp;تلفن:&nbsp;</strong>
-                  66033184-021
+                  {contact.telephone}
                 </p>
                 <p className="contact-detail__item">
                   <strong><FontAwesomeIcon icon="envelope-square" />&nbsp;کد پستی:&nbsp;</strong>
-                  1459973761
+                  {contact.postalcode}
                 </p>
                 <p className="contact-detail__item">
                   <strong><FontAwesomeIcon icon="at" />&nbsp;ایمیل:&nbsp;</strong>
-                  info@humangene.ir
+                  {contact.email}
                 </p>
               </div>
             </div>

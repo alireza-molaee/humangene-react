@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import { getArticleDetail } from '../utils/api';
-import { ScaleLoader } from 'react-spinners';
+import LoaddingPageInternal from '../components/LoaddingPageInternal'
 
 // const post = {
 //   title: 'Post title',
@@ -54,18 +54,7 @@ export default class Article extends Component {
         <Helmet>
             <title>Article</title>
         </Helmet>
-        <Header />
-        <main className="container">
-          <div className="page-loadin-wrapper">
-            <ScaleLoader
-              sizeUnit={"px"}
-              size={150}
-              color={'#123abc'}
-              loading={true}
-            />
-          </div>
-        </main>
-        <Footer />
+        <LoaddingPageInternal />
       </div>
       )
     }

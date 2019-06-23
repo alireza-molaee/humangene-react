@@ -5,6 +5,8 @@ import renderHTML from 'react-render-html';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
+import LoaddingPageInternal from '../components/LoaddingPageInternal';
+import { getPostSingle } from '../utils/api';
 
 const post = {
   title: 'Post title',
@@ -14,7 +16,42 @@ const post = {
 }
 
 export default class PostSingle extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      post: null,
+      isLoadding: true,
+    }
+  }
+
+  componentDidMount() {
+    const postId = this.props.match.params.id;
+    getPostSingle(postId)
+    .then((data) => {
+      this.setState({post: data});
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .then(() => {
+      this.setState({isLoadding: false});
+    })
+  }
+
   render() {
+
+    if (this.state.isLoadding || this.state.post === null) {
+      return (
+        <div id="single-post">
+          <Helmet>
+              <title>PostSingle</title>
+          </Helmet>
+          <LoaddingPageInternal />
+        </div>
+      )
+    }
+
     return (
       <div id="single-post">
         <Helmet>

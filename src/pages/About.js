@@ -5,36 +5,41 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import Member from '../components/Member';
 import SectionHeader from '../components/SectionHeader';
+import LoaddingPageInternal from '../components/LoaddingPageInternal';
+import { getMemberData } from '../utils/api';
 
-const members = [
-  {
-    image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-    name: 'دامون نشتاعلی',
-    job: 'مدیر عامل',
-    description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-    email: 'demo@gmail.com',
-  },
-  {
-    image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-    name: 'دامون نشتاعلی',
-    job: 'مدیر عامل',
-    description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-    email: 'demo@gmail.com',
-  },
-  {
-    image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-    name: 'دامون نشتاعلی',
-    job: 'مدیر عامل',
-    description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-    email: 'demo@gmail.com',
-  }
-]
 
+const aboutText = `
+شرکت هومن ژن پارس، از سال ۱۳۹۵ تحت عنوان مرکز خدمات امیکس شریف (مستقر در دانشگاه صنعتی شریف) توسط جمعی از متخصصین بایوانفورماتیک، بیوشیمی و ژنتیک فعالیت خود را در زمینه ارائه خدمات تحلیل داده‌های حجیم زیستی و توالی یابی نسل جدید آغاز نموده است. این مرکز در حال حاضر در حال پیاده‌سازی سیستم جامع ذخیره و تحلیل داده‌های زیستی برای کاربران تخصصی از جمله دانشجویان، مراکز تحقیقاتی و آزمایشگاه ها و پزشکان حوزه ژنتیک است که نمونه پیش صنعتی این محصول آماده بهره‌برداری می‌باشد.
+
+`
 
 export default class About extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      members: [],
+      isLoadding: true,
+    }
+  }
+
+  componentDidMount() {
+    getMemberData()
+    .then(data => {
+      this.setState({members: data})
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .then(() => {
+      this.setState({isLoadding: false});
+    })
+  }
   
   renderMembers () {
-    return members.map((item) => {
+    return this.state.members.map((item) => {
       return (
         <div className="col-xs-12 col-md-4">
           <Member {...item} />
@@ -44,6 +49,18 @@ export default class About extends Component {
   }
   
   render() {
+
+    if (this.state.isLoadding) {
+      return (
+        <div id="about-page">
+          <Helmet>
+              <title>About Us</title>
+          </Helmet>
+          <LoaddingPageInternal />
+        </div>
+      )
+    }
+
     return (
       <div id="about-page">
         <Helmet>
@@ -53,7 +70,7 @@ export default class About extends Component {
         <Hero>درباره ما</Hero>
         <main className="container">
           <p className="text">
-            asdasdasd
+            {aboutText}
           </p>
           <SectionHeader>اعضای شرکت</SectionHeader>
           <div className="row">
