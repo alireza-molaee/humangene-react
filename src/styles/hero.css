@@ -5,8 +5,11 @@
     width: 100%;
     padding: 40px 100px;
     direction: rtl;
-    text-align: right;
-    
+    text-align: right;   
+}
+
+.sticky ~ .hero {
+    margin-top: 50px;
 }
 
 .hero__bg-image {
