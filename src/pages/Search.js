@@ -27,7 +27,17 @@ export default class Search extends Component {
     return this.state.results.map((item, index) => {
       return (
         <div key={`search-result-${index}`} className="col-xs-12 col-md-12">
-          
+          <table>
+            <tr>
+            {
+              item.length > 0 && item.map(col => (
+              <th>
+                {col}
+              </th>
+              ))
+            }
+            </tr>
+          </table>
         </div>
       )
     })
