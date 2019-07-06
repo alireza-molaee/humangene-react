@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { read } from 'fs';
 
 const ajaxJson = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
@@ -62,115 +63,30 @@ export function getHeaderItems() {
 }
 
 export function getArticleDetail(id) {
-  return ajaxJson.get(`/cms/page/${id}/`)
+  return ajaxJson.get(`/cms/page/${id}`)
     .then(res => {
       return {
         id: res.data['id'],
         title: res.data['title_fa'],
         image: res.data['image'],
         content: res.data['text_fa'],
-        createdAt: res.data['published_date'],
+        createdAt: res.data['published_date'] || new Date(),
         categoryId: res.data['category'],
       };
     })
 }
 
 export function getPostList() {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      res([
-        {
-          id: '1',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/200/300?random=1',
-          category: 'موضوع'
-        },
-        {
-          id: '2',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/180/200?random=2',
-          category: 'موضوع'
-        },
-        {
-          id: '3',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/230/310?random=3',
-          category: 'موضوع'
-        },
-        {
-          id: '4',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/300/300?random=4',
-          category: 'موضوع'
-        },
-        {
-          id: '5',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/400/700?random=5',
-          category: 'موضوع'
-        },
-        {
-          id: '6',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/220/290?random=6',
-          category: 'موضوع'
-        },
-        {
-          id: '7',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/200/300?random=7',
-          category: 'موضوع'
-        },
-        {
-          id: '8',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/300/200?random=8',
-          category: 'موضوع'
-        },
-        {
-          id: '9',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/250/310?random=9',
-          category: 'موضوع'
-        },
-        {
-          id: '10',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/400/500?random=10',
-          category: 'موضوع'
-        },
-        {
-          id: '11',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/400/200?random=11',
-          category: 'موضوع'
-        },
-        {
-          id: '12',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/220/320?random=12',
-          category: 'موضوع'
-        },
-        {
-          id: '13',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/300/520?random=13',
-          category: 'موضوع'
-        },
-        {
-          id: '14',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/200/320?random=14',
-          category: 'موضوع'
-        },
-        {
-          id: '15',
-          title: 'پست ۱',
-          image: 'https://picsum.photos/200/400?random=15',
-          category: 'موضوع'
-        },
-      ])
-    }, 2000)
+  return ajaxJson.get(`/cms/news`)
+  .then(res => {
+    return res.data.map(item => {
+      return {
+        id: item['id'],
+        title: item['title_fa'],
+        image: item['image'],
+        category: item['category'],
+      }
+    })
   })
 }
 
@@ -190,74 +106,30 @@ export function getPostSingle(id) {
 }
 
 export function getServices() {
-  return new Promise(res => {
-    setTimeout(() => {
-      const services = [
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-        {
-          title: 'تحلیل داده‌های خام زیستی',
-          image: 'http://humangene.ir/wp-content/uploads/2018/06/acne-icon.png',
-          description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ',
-          link: 'google.com'
-        },
-      ]
-      res(services)
-    }, 2000)
+  return ajaxJson.get(`/cms/service`)
+  .then(res => {
+    return res.data.map(item => {
+      return {
+        title: item['title'],
+        image: item['image'],
+        description: item['description'],
+        link: item['link'],
+      }
+    })
   })
 }
 
 export function getFeatures() {
-  return new Promise(res => {
-    const features = [
-      {
-        title: 'ارائه‌ی خدمات در کمترین زمان',
-        icon: 'car',
-        description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-      },
-      {
-        title: 'ارائه‌ی خدمات در کمترین زمان',
-        icon: 'car',
-        description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-      },
-      {
-        title: 'ارائه‌ی خدمات در کمترین زمان',
-        icon: 'car',
-        description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. '
-      },
-    ]
-    setTimeout(() => {
-      res(features);
-    }, 2000)
-  })
+  return ajaxJson.get(`/cms/feature`)
+  .then(res => {
+    return res.data.map(item => {
+      return {
+        title: item['title'],
+        icon: item['icon'],
+        description: item['description'],
+      }
+    })
+  });
 }
 
 export function getCompanies() {
