@@ -74,6 +74,31 @@ export default class Header extends React.Component {
     })
   }
 
+  renderPageLinksFirstView() {
+    return this.state.headerItems.map((item, indexItem) => {
+      if (item.link) {
+        return <NavLink key={`header-item-${indexItem}`} className="header__nav-bar__item--first-view" to={item.link} exact activeClassName="active">{item.title}</NavLink>
+      } else if (item.items) {
+        return (<div key={`header-item-${indexItem}`} className="item-group item-group--first-view">
+          <span className="item-group__title">{item.title}</span>
+          <ul className="item-group__sub-menu">
+            {
+              item.items.map((subItem, indexSub) => {
+                return (
+                  <li key={`header-item-${indexItem}-sub-${indexSub}`} className="item-group__sub-menu__item">
+                    <NavLink className="item-group__sub-menu__item__link" to={subItem.link} exact activeClassName="active">{subItem.title}</NavLink>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>)
+      } else {
+        return '';
+      }
+    })
+  }
+
   render() {
     const { isSticky } = this.props;
 
@@ -107,12 +132,13 @@ export default class Header extends React.Component {
         {
           isSticky && (
             <header className="header--first-view">
-              <div class="container header__content--first-view">
+              <div className="container header__content--first-view">
                 <Link to="/">
                   <img className="header__logo--first-view" src={logo} alt={'logo'} />
                 </Link>
                 <nav className="header__nav-bar--first-view">
                   <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">خانه</NavLink>
+                  {this.renderPageLinksFirstView()}
                   <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">اخبار</NavLink>
                   <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">درباره ما</NavLink>
                   <NavLink className="header__nav-bar__item--first-view" to="/contact-us" activeClassName="active">تماس با ما</NavLink>
