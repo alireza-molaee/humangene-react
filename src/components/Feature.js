@@ -27,9 +27,9 @@ export default function Feature(props) {
             right={fadePosition === 'right'}
         >
             <div>
-                <div class="feature">
-                    <div class="feature__icon">
-                        <div class={`feature__icon__clip-wrap ${gradientClassName}`}>
+                <div className="feature">
+                    <div className="feature__icon">
+                        <div className={`feature__icon__clip-wrap ${gradientClassName}`}>
                             <FontAwesomeIcon icon={props.icon} size="3x" color="white" />
                         </div>
                         <svg height="0" width="0">
@@ -40,8 +40,8 @@ export default function Feature(props) {
                             </defs>
                         </svg>
                     </div>
-                    <div class="feature__title">{props.title}</div>
-                    <div class="feature__content">
+                    <div className="feature__title">{props.title}</div>
+                    <div className="feature__content">
                         <p>{props.description}</p>
                     </div>
                 </div>

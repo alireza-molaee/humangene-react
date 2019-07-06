@@ -87,7 +87,7 @@ export default class Home extends Component {
         </Helmet>
         <Header isSticky />
         <Slider slids={this.state.slids} />
-        <div class="divider divider--full-width divider--gradient"></div>
+        <div className="divider divider--full-width divider--gradient"></div>
         <section className="features-section container-fluid">
           <div className="row around-xs">
             {renderedFeatures}
