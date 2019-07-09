@@ -133,68 +133,25 @@ export function getFeatures() {
 }
 
 export function getCompanies() {
-  return new Promise(res => {
-    const companies = [
-      {
-        title: 'دانشگاه علوم پزشکی شهید بهشتی',
-        image: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png',
-        link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-      },
-      {
-        title: 'پژوهشکده جهاد دانشگاهی معتمد',
-        image: 'http://humangene.ir/wp-content/uploads/2018/06/57431303.jpg',
-        link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-      },
-      {
-        title: 'آزمایشگاه نیلو',
-        image: 'http://humangene.ir/wp-content/uploads/2018/06/logo1.png',
-        link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-      },
-      {
-        title: 'آزمایشگاه پارسه',
-        image: 'http://humangene.ir/wp-content/uploads/2018/06/parseh-lab-logo.jpg',
-        link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-      },
-      {
-        title: 'مرکز فوق تخصصی متابولیک دانشگاه علوم پزشکی تهران',
-        image: 'http://humangene.ir/wp-content/uploads/2018/06/download.jpg',
-        link: 'http://humangene.ir/wp-content/uploads/2018/06/sbmu.svg_.png'
-      },
-    ]
-    setTimeout(() => {
-      res(companies);
-    }, 2000)
+  return ajaxJson.get(`/cms/companies`)
+  .then(res => {
+    return res.data.map(item => ({
+      title: item['title'],
+      image: item['image'],
+      link: item['link'],
+    }))
   })
 }
 
 export function getSlids() {
-  return new Promise(res => {
-    const slids = [
-      {
-        image: "https://picsum.photos/id/5/1200/900",
-        title: "عنوان اول",
-        description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-        link: 'google.com'
-      },
-      {
-        image: "https://picsum.photos/id/6/1200/900",
-        title: "عنوان اول",
-        description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. "
-      },
-      {
-        image: "https://picsum.photos/id/7/1200/900",
-        title: "عنوان اول",
-        description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. "
-      },
-      {
-        image: "https://picsum.photos/id/8/1200/900",
-        title: "عنوان اول",
-        description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. "
-      },
-    ]
-    setTimeout(() => {
-      res(slids);
-    }, 2000)
+  return ajaxJson.get('/cms/slider')
+  .then(res => {
+    return res.data[0].items.map(item => ({
+      image: item['image'],
+      title: item['text_fa'],
+      description: '',
+      link: item['url'],
+    }));
   })
 }
 
@@ -211,33 +168,15 @@ export function getHomeData() {
 }
 
 export function getMemberData() {
-  return new Promise(res => {
-    const members = [
-      {
-        image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-        name: 'دامون نشتاعلی',
-        job: 'مدیر عامل',
-        description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-        email: 'demo@gmail.com',
-      },
-      {
-        image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-        name: 'دامون نشتاعلی',
-        job: 'مدیر عامل',
-        description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-        email: 'demo@gmail.com',
-      },
-      {
-        image: 'http://humangene.ir/wp-content/uploads/bfi_thumb/damoun-nst2ylo6x1xz25z67xy8bdgga5iznr90d9sz0av6wo.png',
-        name: 'دامون نشتاعلی',
-        job: 'مدیر عامل',
-        description: 'دکتری مهندسی برق- مخابرات سیستم دانشگاه صنعتی شریف',
-        email: 'demo@gmail.com',
-      }
-    ]
-    setTimeout(() => {
-      res(members);
-    }, 2000)
+  return ajaxJson.get('/cms/members')
+  .then(res => {
+    return res.data.map(item => ({
+      image: item['image'],
+      name: item['name'],
+      job: item['job'],
+      description: item['description'],
+      email: item['email'],
+    }))
   })
 }
 
