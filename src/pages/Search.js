@@ -81,7 +81,7 @@ export default class Search extends Component {
         <Helmet>
             <title>Search</title>
         </Helmet>
-        <Header />
+        <Header onClickLogin={() => {this.props.openLoginModal()}} />
         <Hero>جستجو</Hero>
         <main className="container">
           <div className="row">

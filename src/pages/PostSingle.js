@@ -57,7 +57,7 @@ export default class PostSingle extends Component {
         <Helmet>
             <title>PostSingle</title>
         </Helmet>
-        <Header />
+        <Header onClickLogin={() => {this.props.openLoginModal()}} />
         <Hero>{post.title}</Hero>
         <main className="container">
           <div className="row">

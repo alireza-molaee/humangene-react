@@ -7,7 +7,6 @@ const Home = React.lazy(() => import('./pages/Home'));
 const PostList = React.lazy(() => import('./pages/PostList'));
 const PostSingle = React.lazy(() => import('./pages/PostSingle'));
 const Search = React.lazy(() => import('./pages/Search'));
-const Login = React.lazy(() => import('./pages/Login'));
 
 const routes = [
     {
@@ -37,10 +36,6 @@ const routes = [
     {
         path: '/search',
         component: Search
-    },
-    {
-        path: '/login',
-        component: Login
     }
 ]
 

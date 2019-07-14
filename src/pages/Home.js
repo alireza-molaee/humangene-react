@@ -85,7 +85,7 @@ export default class Home extends Component {
         <Helmet>
             <title>Home</title>
         </Helmet>
-        <Header isSticky />
+        <Header isSticky onClickLogin={() => {this.props.openLoginModal()}} />
         <Slider slids={this.state.slids} />
         <div className="divider divider--full-width divider--gradient"></div>
         <section className="features-section container-fluid">

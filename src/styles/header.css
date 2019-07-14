@@ -212,3 +212,20 @@
         top: 0;
     }
 }
+
+.header__right_wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.header-auth {
+    margin-left: 20px;
+}
+.header-auth .btn {
+    display: block;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 9px 15px;
+    height: 30px;
+}

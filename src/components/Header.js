@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from '../assets/logo.png';
 import { getHeaderItems } from '../utils/api';
 import LoaddingPage from './LoaddingPage';
+import HeaderAuth from './HeaderAuth';
 
 
 export default class Header extends React.Component {
@@ -120,13 +121,16 @@ export default class Header extends React.Component {
                   </defs>
               </svg>
             </Link>
-            <nav className="header__nav-bar">
-              <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
-              {this.renderPageLinks()}
-              <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
-              <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
-              <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
-            </nav>
+            <div className="header__right_wrapper">
+              <HeaderAuth onClickLogin={this.props.onClickLogin} />
+              <nav className="header__nav-bar">
+                <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
+                {this.renderPageLinks()}
+                <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
+                <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
+                <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
+              </nav>
+            </div>
           </div>
         </header>
         {
@@ -136,13 +140,16 @@ export default class Header extends React.Component {
                 <Link to="/">
                   <img className="header__logo--first-view" src={logo} alt={'logo'} />
                 </Link>
-                <nav className="header__nav-bar--first-view">
-                  <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">خانه</NavLink>
-                  {this.renderPageLinksFirstView()}
-                  <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">اخبار</NavLink>
-                  <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">درباره ما</NavLink>
-                  <NavLink className="header__nav-bar__item--first-view" to="/contact-us" activeClassName="active">تماس با ما</NavLink>
-                </nav>
+                <div className="header__right_wrapper">
+                  <HeaderAuth onClickLogin={this.props.onClickLogin} />
+                  <nav className="header__nav-bar--first-view">
+                    <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">خانه</NavLink>
+                    {this.renderPageLinksFirstView()}
+                    <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">اخبار</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">درباره ما</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/contact-us" activeClassName="active">تماس با ما</NavLink>
+                  </nav>
+                </div>
               </div>
             </header>
           )

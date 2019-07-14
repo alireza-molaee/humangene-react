@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logoPng from '../assets/logor.png'
 
-export default class Login extends Component {
+export default class LoginModal extends Component {
     render() {
         return (
-            <div class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <div class="modal" style={{display: this.props.show ? 'block' : 'none'}}>
+                <span onClick={() => {this.props.onClose()}} class="close" title="Close Modal">&times;</span>
                 <form class="modal-content animate">
                     <div class="imgcontainer">
                         <img src={logoPng} alt="logo" class="avatar" />
@@ -24,6 +24,8 @@ export default class Login extends Component {
 
                         <div className="col-xs-12 btn-container">
                             <button className="btn" type="submit">ورود</button>
+                                <span>&nbsp;</span>
+                            <button className="btn btn--secondary" onClick={() => {this.props.onClose()}} type="button">انصراف</button>
                         </div>
                     </div>
                 </form>

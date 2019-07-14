@@ -66,7 +66,7 @@ export default class About extends Component {
         <Helmet>
             <title>About Us</title>
         </Helmet>
-        <Header />
+        <Header onClickLogin={() => {this.props.openLoginModal()}} />
         <Hero>درباره ما</Hero>
         <main className="container">
           <p className="text">
