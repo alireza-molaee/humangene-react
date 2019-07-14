@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { read } from 'fs';
 
 const ajaxJson = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
