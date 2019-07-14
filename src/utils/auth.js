@@ -6,6 +6,7 @@ export function login(user) {
 
 export function logout() {
     localStorage.removeItem('user');
+    // eslint-disable-next-line
     window.location = window.location;
 }
 
