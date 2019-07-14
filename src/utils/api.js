@@ -1,9 +1,17 @@
 import axios from 'axios';
+import * as auth from './auth';
 
 const ajaxJson = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' }
+});
+
+ajaxJson.interceptors.request.use(function (config) {
+  if (auth.isLogin()) {
+    config.headers['Authorization'] = auth.getUser().token;
+  }
+  return config;
 });
 
 export function getCategories() {
@@ -190,4 +198,15 @@ export function queryForSearch(term) {
   return ajaxJson.post(`/query/`, {
     "query_text": term,
   })
+}
+
+export function login(data) {
+  return ajaxJson.post(`/api-token-auth/`, {
+    "username": data.username,
+    "password": data.password,
+  })
+  .then(res => ({
+    token: res.data['token'],
+    name: 'علیرضا مولایی'
+  }))
 }
