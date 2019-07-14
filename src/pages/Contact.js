@@ -6,7 +6,8 @@ import Hero from '../components/Hero';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import renderHTML from 'react-render-html';
 import { Formik } from 'formik';
-import { postContactForm } from '../utils/api'
+import { postContactForm } from '../utils/api';
+import { toast } from 'react-toastify';
 
 const contact = {
   address: `تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم`,
@@ -17,10 +18,12 @@ const contact = {
 
 export default class Contact extends Component {
 
-  handleSubmitForm(values, { setSubmitting }) {
+  handleSubmitForm(values, { setSubmitting, resetForm }) {
     postContactForm(values)
     .then(() => {
       setSubmitting(false);
+      resetForm();
+      toast.success('پیام شما با موفقیت ارسال شد.')
     })
   }
 

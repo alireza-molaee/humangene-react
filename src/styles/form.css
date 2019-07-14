@@ -157,3 +157,21 @@ select option {
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
+
+/* form group styles */
+
+.form-group {
+  direction: rtl;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.form-group input {
+  text-align: right;
+}

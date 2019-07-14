@@ -146,6 +146,9 @@ export function getCompanies() {
 export function getSlids() {
   return ajaxJson.get('/cms/slider')
   .then(res => {
+    if (!res.data[0]) {
+      return []
+    }
     return res.data[0].items.map(item => ({
       image: item['image'],
       title: item['text_fa'],
@@ -181,10 +184,11 @@ export function getMemberData() {
 }
 
 export function postContactForm(data) {
-  console.log(data);
-  return new Promise(res => {
-    setTimeout(() => {
-      res();
-    }, 2000)
+  return ajaxJson.post(`/cms/contactus`, data)
+}
+
+export function queryForSearch(term) {
+  return ajaxJson.post(`/query/`, {
+    "query_text": term,
   })
 }

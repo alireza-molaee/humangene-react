@@ -5,6 +5,8 @@ import routes from './routes';
 import 'react-animated-slider/build/horizontal.css';
 import "./styles/index.css";
 import LoaddingPage from './components/LoaddingPage'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
           </Switch>
         </Suspense>
       </Router>
+      <ToastContainer />
     </div>
   );
 }
