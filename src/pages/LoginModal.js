@@ -36,21 +36,21 @@ export default class LoginModal extends Component {
 
     render() {
         return (
-            <div class="modal" style={{display: this.props.show ? 'block' : 'none'}}>
-                <span onClick={() => {this.props.onClose()}} class="close" title="Close Modal">&times;</span>
-                <form class="modal-content animate" onSubmit={this.submitLogin}>
-                    <div class="imgcontainer">
-                        <img src={logoPng} alt="logo" class="avatar" />
+            <div className="modal" style={{display: this.props.show ? 'block' : 'none'}}>
+                <span onClick={() => {this.props.onClose()}} className="close" title="Close Modal">&times;</span>
+                <form className="modal-content animate" onSubmit={this.submitLogin}>
+                    <div className="imgcontainer">
+                        <img src={logoPng} alt="logo" className="avatar" />
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                         <div className="col-xs-12 form-group">
-                            <label for="uname"><b>نام کاربری</b></label>
+                            <label htmlFor="uname"><b>نام کاربری</b></label>
                             <input type="text" value={this.state.username} onChange={this.handleInputChange} placeholder="نام کاربری خود را وارد کنید" name="username" required />
                         </div>
 
                         <div className="col-xs-12 form-group">
-                            <label for="psw"><b>رمز عبور</b></label>
+                            <label htmlFor="psw"><b>رمز عبور</b></label>
                             <input type="password" value={this.state.password} onChange={this.handleInputChange} placeholder="رمز عبور را وارد کنید" name="password" required />
                         </div>
 

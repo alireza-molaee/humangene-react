@@ -195,6 +195,7 @@ export function postContactForm(data) {
 }
 
 export function queryForSearch(term) {
+  ajaxJson.get('/task/').then(res => console.log(res.data));
   return ajaxJson.post(`/query/`, {
     "query_text": term,
   })
