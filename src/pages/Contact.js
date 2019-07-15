@@ -33,7 +33,7 @@ export default class Contact extends Component {
         <Helmet>
             <title>Contact</title>
         </Helmet>
-        <Header onClickLogin={() => {this.props.openLoginModal()}} />
+        <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
         <Hero>تماس با ما</Hero>
         <main className="container">
           <div className="row">

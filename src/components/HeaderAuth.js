@@ -14,6 +14,8 @@ export default function HeaderAuth(props) {
         return (
             <div className="header-auth">
                 <button type="button" onClick={() => {props.onClickLogin()}} className="btn">ورود</button>
+                <span>&nbsp;</span>
+                <button type="button" onClick={() => {props.onClickRegister()}} className="btn btn--outline">ثبت نام</button>
             </div>
         )
     }

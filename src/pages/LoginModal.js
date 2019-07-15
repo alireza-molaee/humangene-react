@@ -11,6 +11,7 @@ export default class LoginModal extends Component {
         this.state = {
             username: '',
             password: '',
+            validationErrors: {}
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,6 +26,18 @@ export default class LoginModal extends Component {
         }).then(user => {
             auth.login(user)
             this.props.onClose();
+        }).catch(err => {
+            if (err.response) {
+                this.setState({
+                    ...this.state,
+                    validationErrors: {
+                        message: err.response.data.result || err.response.data[0] || '',
+                        email: err.response.data.email || '',
+                        password: err.response.data.password || '',
+                    }
+                })
+                
+            }
         })
     }
 
@@ -44,13 +57,16 @@ export default class LoginModal extends Component {
                     </div>
 
                     <div className="row">
-                        <div className="col-xs-12 form-group">
-                            <label htmlFor="uname"><b>نام کاربری</b></label>
+                        {this.state.validationErrors.message && <div className="col-xs-12"><p style={{color: 'red', direction: 'rtl', fontSize: '14px', marginBottom: '15px'}}>{this.state.validationErrors.message}</p></div>}
+                        <div className={this.state.validationErrors.email ? "col-xs-12 form-group invalid" : "col-xs-12 form-group"}>
+                            <label htmlFor="uname"><b>نام کاربری (ایمیل)</b></label>
+                            {this.state.validationErrors.email && (<span className="error-message">{this.state.validationErrors.firstName}</span>)}                            
                             <input type="text" value={this.state.username} onChange={this.handleInputChange} placeholder="نام کاربری خود را وارد کنید" name="username" required />
                         </div>
 
-                        <div className="col-xs-12 form-group">
+                        <div className={this.state.validationErrors.password ? "col-xs-12 form-group invalid" : "col-xs-12 form-group"}>
                             <label htmlFor="psw"><b>رمز عبور</b></label>
+                            {this.state.validationErrors.password && (<span className="error-message">{this.state.validationErrors.firstName}</span>)}                            
                             <input type="password" value={this.state.password} onChange={this.handleInputChange} placeholder="رمز عبور را وارد کنید" name="password" required />
                         </div>
 

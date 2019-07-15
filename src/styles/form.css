@@ -175,3 +175,18 @@ select option {
 .form-group input {
   text-align: right;
 }
+
+.form-group.invalid label {
+  color: red;
+}
+
+.form-group.invalid input {
+  border: 1px solid red;
+  border-color: red;
+  color: red;
+}
+
+.form-group .error-message {
+  color: red;
+  font-size: 12px;
+}

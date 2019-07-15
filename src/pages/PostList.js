@@ -139,7 +139,7 @@ export default class PostList extends Component {
         <Helmet>
             <title>PostList</title>
         </Helmet>
-        <Header onClickLogin={() => {this.props.openLoginModal()}} />
+        <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
         <Hero>اخبار</Hero>
         <main>
           <StackGrid

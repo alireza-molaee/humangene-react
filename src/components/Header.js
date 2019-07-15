@@ -122,9 +122,10 @@ export default class Header extends React.Component {
               </svg>
             </Link>
             <div className="header__right_wrapper">
-              <HeaderAuth onClickLogin={this.props.onClickLogin} />
+              <HeaderAuth onClickLogin={this.props.onClickLogin} onClickRegister={this.props.onClickRegister} />
               <nav className="header__nav-bar">
                 <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
+                <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">سرویس جستجو</NavLink>                
                 {this.renderPageLinks()}
                 <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
                 <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
@@ -144,6 +145,7 @@ export default class Header extends React.Component {
                   <HeaderAuth onClickLogin={this.props.onClickLogin} />
                   <nav className="header__nav-bar--first-view">
                     <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">خانه</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/search" activeClassName="active">سرویس جستجو</NavLink>
                     {this.renderPageLinksFirstView()}
                     <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">اخبار</NavLink>
                     <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">درباره ما</NavLink>

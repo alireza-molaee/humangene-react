@@ -9,7 +9,7 @@ const ajaxJson = axios.create({
 
 ajaxJson.interceptors.request.use(function (config) {
   if (auth.isLogin()) {
-    config.headers['Authorization'] = auth.getUser().token;
+    config.headers['Authorization'] = 'token ' + auth.getUser().token;
   }
   return config;
 });
@@ -202,12 +202,24 @@ export function queryForSearch(term) {
 }
 
 export function login(data) {
-  return ajaxJson.post(`/api-token-auth/`, {
-    "username": data.username,
+  return ajaxJson.post(`/member/login`, {
+    "email": data.username,
     "password": data.password,
   })
   .then(res => ({
     token: res.data['token'],
     name: 'علیرضا مولایی'
+  }))
+}
+
+export function register(data) {
+  return ajaxJson.post(`/member/register`, {
+    "email": data.email,
+    "password": data.password,
+    "first_name": data.firstName,
+    "last_name": data.lastName
+  })
+  .then(res => ({
+
   }))
 }

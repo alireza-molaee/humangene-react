@@ -64,7 +64,7 @@ export default class Article extends Component {
         <Helmet>
             <title>Article</title>
         </Helmet>
-        <Header onClickLogin={() => {this.props.openLoginModal()}} />
+        <Header onClickLogin={() => {this.props.openLoginModal()} } onClickRegister={() => {this.props.openRegisterModal()}} />
         <Hero>{this.state.title}</Hero>
         <main className="container">
           <div className="row">
