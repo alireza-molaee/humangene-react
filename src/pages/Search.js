@@ -97,7 +97,7 @@ export default class Search extends Component {
       return []
     }
     const indexOfDiagnosis = this.state.headers.indexOf('Diagnosis');
-    return this.state.results.map(i=>(i[indexOfDiagnosis])).filter((x, i, a) => a.indexOf(x) == i);
+    return this.state.results.map(i=>(i[indexOfDiagnosis])).filter((x, i, a) => a.indexOf(x) === i);
   }
 
   calcDiagnosisCounts() {

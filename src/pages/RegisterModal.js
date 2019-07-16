@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logoPng from '../assets/logor.png'
 import { register } from '../utils/api';
-import * as auth from '../utils/auth';
 
 export default class RegisterModal extends Component {
 
