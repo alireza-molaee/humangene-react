@@ -1,5 +1,5 @@
 #search-page .search-input-group {
-    margin: 50px auto;
+    margin: 150px auto;
     position: relative;
 }
 
@@ -28,4 +28,26 @@
 
 #search-page .search-input-group button ~  #search-page .search-input-group input:focus {
     border-color: green !important;
+}
+
+#search-page .error-message {
+    margin-top: 15px;
+    color: red;
+    direction: rtl;
+}
+
+.search-result-table {
+    font-family: "Times New Roman", Times, serif;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.search-result-table th {
+    padding: 8px 10px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.search-result-table td {
+    font-size: 12px;
 }

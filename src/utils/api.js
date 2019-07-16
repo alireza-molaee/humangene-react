@@ -195,9 +195,20 @@ export function postContactForm(data) {
 }
 
 export function queryForSearch(term) {
-  ajaxJson.get('/task/').then(res => console.log(res.data));
+  // ajaxJson.get('/task/').then(res => console.log(res.data));
   return ajaxJson.post(`/query/`, {
     "query_text": term,
+  })
+  .then(res => {
+    const headers = Object.keys(res.data['q_result'][0]);
+    const results = res.data['q_result'].map(r => {
+      return Object.values(r);
+    })
+    return {
+      message: res.data['result'],
+      headers,
+      results
+    }
   })
 }
 

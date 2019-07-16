@@ -1,0 +1,46 @@
+table {
+    border: 1px solid #FFFFFF;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table td, table th {
+    border: 0px solid #FFFFFF;
+    padding: 3px 2px;
+  }
+  table tbody td {
+    font-size: 13px;
+  }
+  table tr:nth-child(even) {
+    background: #BCD9F9;
+  }
+  table thead {
+    background: #315AB6;
+    border-bottom: 5px solid #FFFFFF;
+  }
+  table thead th {
+    font-size: 17px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  table tfoot {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    background: #BCD9F9;
+    border-top: 3px solid #444444;
+  }
+  table tfoot td {
+    font-size: 14px;
+  }
+  table tfoot .links {
+    text-align: right;
+  }
+  table tfoot .links a {
+    display: inline-block;
+    background: #315AB6;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
