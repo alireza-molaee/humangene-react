@@ -7,3 +7,14 @@
     text-align: justify;
     direction: rtl;
 }
+
+@media only screen and (max-width: 768px) {
+    #about-page .text {
+        padding: 0 20px;
+        line-height: 1.3rem;
+        font-size: 14px;
+        text-align: justify;
+        direction: rtl;
+        margin-bottom: 40px;
+    }
+}

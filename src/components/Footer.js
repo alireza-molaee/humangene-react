@@ -5,10 +5,10 @@ export default function Footer() {
   return (
     <footer className="footer container-fluid">
       <div className="row reverse">
-        <div className="col-md-4 footer__image-col">
+        <div className="col-xs-12 col-md-4 footer__image-col">
             <img className="footer__image" src={logo} alt="humangene" />
         </div>
-        <div className="col-md-4 footer__contact-col">
+        <div className="col-xs-12 col-md-4 footer__contact-col">
             <p className="footer__contact-item">
             تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم
             </p>
@@ -22,7 +22,7 @@ export default function Footer() {
             ایمیل : info@humangene.ir
             </p>
         </div>
-        <div className="col-md-4">
+        <div className="col-xs-12 col-md-4">
 
         </div>
       </div>

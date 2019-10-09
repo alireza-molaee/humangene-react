@@ -31,3 +31,61 @@
 #single-post .meta-data .meta-data__date {
     color: orange;
 }
+
+.comments-section {
+    margin-top: 80px;
+}
+
+.comment {
+    position: relative;
+    direction: rtl;
+    padding: 10px;
+    padding-right: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.comment::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.comment .comment-image {
+    float: right;
+    margin-right: -90px;
+}
+
+.comment .comment-user {
+    font-weight: 700;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.comment .commment-date {
+    color: rgb(7, 161, 7);
+    margin-top: 5px;
+}
+
+.comment .comment-text {
+    line-height: 20px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.comment-form-section {
+    direction: rtl;
+    margin-top: 50px;
+}
+
+.comment-form-title {
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+.comment-fotm-text {
+    margin-bottom: 10px;
+}
+

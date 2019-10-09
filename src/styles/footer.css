@@ -24,3 +24,18 @@
     margin-bottom: 15px;
     direction: rtl;
 }
+
+@media only screen and (max-width: 768px) {
+    .footer {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .footer .footer__image-col {
+        margin-bottom: 15px;
+    }
+
+    .footer .footer__image-col > .footer__image {
+        height: 140px;
+    }
+}

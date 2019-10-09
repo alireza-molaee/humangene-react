@@ -95,3 +95,31 @@
 .nextButton > svg > polygon {
     fill: #fff;
 } 
+
+@media only screen and (max-width: 768px) {
+    .slide__content__title {
+        font-size: 28px;
+        line-height: 1.4em;
+    }
+
+    .slide__content {
+        width: 70%;
+        padding: 50px 0;
+        bottom: 10vh;
+        right: 70px;
+        position: absolute;
+        text-align: center;
+    }
+
+    .slider {
+        height: 70vh;
+    }
+
+    .slider a.nextButton {
+        display: none;
+    }
+
+    .slider a.previousButton {
+        display: none;
+    }
+}

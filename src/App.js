@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import LoginModal from './pages/LoginModal'
 import RegisterModal from './pages/RegisterModal'
 import 'react-toastify/dist/ReactToastify.css';
+import I18n from './i18n';
 
 function App() {
 
@@ -16,32 +17,34 @@ function App() {
   const [showRegisterModal, setShowRegisterModal] = useState(false)
 
   return (
-    <div className="App">
-      <Helmet>
-        <title>Human Gene</title>
-      </Helmet>
-      <Router>
-        <Suspense fallback={<LoaddingPage />}>
-          <Switch>
-            {
-              routes.map((route, index) => {
-                const RouteComponent = route.component;
-                return <Route key={`route-${index}`} path={route.path} exact render={routeProps => (
-                  <RouteComponent {...routeProps} 
-                    openLoginModal={() => {setShowLoginModal(true)}} 
-                    openRegisterModal={() => {setShowRegisterModal(true)}}
-                  />
-                )} />
-              })
-            }
-            <Redirect to="/" />
-          </Switch>
-        </Suspense>
-      </Router>
-      <LoginModal show={showLoginModal} onClose={() => {setShowLoginModal(false)}} />
-      <RegisterModal show={showRegisterModal} onClose={() => {setShowRegisterModal(false)}} />
-      <ToastContainer />
-    </div>
+    <I18n lang="fa">
+      <div className="App">
+        <Helmet>
+          <title>Human Gene</title>
+        </Helmet>
+        <Router>
+          <Suspense fallback={<LoaddingPage />}>
+            <Switch>
+              {
+                routes.map((route, index) => {
+                  const RouteComponent = route.component;
+                  return <Route key={`route-${index}`} path={route.path} exact render={routeProps => (
+                    <RouteComponent {...routeProps} 
+                      openLoginModal={() => {setShowLoginModal(true)}} 
+                      openRegisterModal={() => {setShowRegisterModal(true)}}
+                    />
+                  )} />
+                })
+              }
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
+        </Router>
+        <LoginModal show={showLoginModal} onClose={() => {setShowLoginModal(false)}} />
+        <RegisterModal show={showRegisterModal} onClose={() => {setShowRegisterModal(false)}} />
+        <ToastContainer />
+      </div>
+    </I18n>
   );
 }
 

@@ -13,10 +13,12 @@ export default class Header extends React.Component {
     this.state = {
       isLoading: true,
       headerItems: [],
+      menuIsOpen: false,
     }
     this.headerRef = createRef();
     this.onScroll = this.onScroll.bind(this);
     this.renderPageLinks = this.renderPageLinks.bind(this);
+    this.handleClickOnHamburgerBtn = this.handleClickOnHamburgerBtn.bind(this);
   }
 
   componentDidMount() {
@@ -100,6 +102,12 @@ export default class Header extends React.Component {
     })
   }
 
+  handleClickOnHamburgerBtn(e) {
+    this.setState({
+      menuIsOpen: !this.state.menuIsOpen
+    })
+  }
+
   render() {
     const { isSticky } = this.props;
 
@@ -122,6 +130,9 @@ export default class Header extends React.Component {
               </svg>
             </Link>
             <div className="header__right_wrapper">
+              <div className="header_toggle-menu-button-ccontainer">
+                <button onClick={this.handleClickOnHamburgerBtn} className={this.state.menuIsOpen ? "header_toggle-menu-button active" : "header_toggle-menu-button"}></button>
+              </div>
               <HeaderAuth onClickLogin={this.props.onClickLogin} onClickRegister={this.props.onClickRegister} />
               <nav className="header__nav-bar">
                 <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
@@ -131,6 +142,18 @@ export default class Header extends React.Component {
                 <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
                 <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
               </nav>
+            </div>
+          </div>
+          <div className={this.state.menuIsOpen ? "hamburger-menu-wrapper open" : "hamburger-menu-wrapper"}>
+            <div className="hamburger-menu">
+              <nav className="header__nav-bar--vertical">
+                  <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">سرویس جستجو</NavLink>                
+                  {this.renderPageLinks()}
+                  <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
+                </nav>
             </div>
           </div>
         </header>

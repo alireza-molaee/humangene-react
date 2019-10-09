@@ -6,23 +6,23 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import LoaddingPageInternal from '../components/LoaddingPageInternal';
-import { getPostSingle } from '../utils/api';
+import { getPostSingle, getPostComents, postPostComment } from '../utils/api';
+import md5 from 'md5';
+import * as auth from '../utils/auth';
+import { I18nContext } from '../i18n'
 
-const post = {
-  title: 'Post title',
-  image: 'http://humangene.ir/wp-content/uploads/2018/07/vencidislide-3-1024x539-768x404.jpg',
-  description: `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. <br> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. <br> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-  createdAt: new Date(),
-}
-
-export default class PostSingle extends Component {
+class PostSingle extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       post: null,
       isLoadding: true,
+      comments: [],
+      commentText: '',
     }
+
+    this.handleSubmitCommentForm = this.handleSubmitCommentForm.bind(this);
   }
 
   componentDidMount() {
@@ -35,11 +35,49 @@ export default class PostSingle extends Component {
       console.error(err);
     })
     .then(() => {
+      return getPostComents(postId)
+    })
+    .then(data => {
+      this.setState({comments: data});
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .then(() => {
       this.setState({isLoadding: false});
     })
   }
 
+  handleSubmitCommentForm(e) {
+    e.preventDefault();
+    const postId = this.props.match.params.id;
+    const commentText = this.state.commentText;
+    postPostComment(postId, commentText)
+    .then(data => {
+      this.setState({
+        comments: [
+          ...this.state.comments,
+          data
+        ]
+      })
+    })
+  }
+
+  renderComment(comment) {
+    const gravAvatarHash = comment.userName && md5(comment.userName.trim().toLowerCase())
+    return (
+      <div key={`comment-${comment.id}`} className="comment">
+        <img className="comment-image" src={`https://www.gravatar.com/avatar/${gravAvatarHash}?d=mp`} alt="comment-tumbnail-image" />
+        <h5 className="comment-user">{comment.userName}</h5>
+        <h6 className="commment-date">{comment.sendDate && comment.sendDate.format('jYYYY/jMM/jDD HH:mm')}</h6>
+        <p className="comment-text">{comment.text}</p>
+      </div>
+    )
+  }
+
   render() {
+    const post = this.state.post;
+    const isUserLogin = auth.isLogin();
 
     if (this.state.isLoadding || this.state.post === null) {
       return (
@@ -70,9 +108,37 @@ export default class PostSingle extends Component {
               <div className="content">{renderHTML(post.description)}</div>
             </div>
           </div>
+          <section className="comments-section">
+            {
+              this.state.comments.map(c => (this.renderComment(c)))
+            }
+          </section>
+          {
+            isUserLogin && (
+              <section className="comment-form-section">
+                <form onSubmit={this.handleSubmitCommentForm}>
+                  <label htmlFor="comment-input" className="comment-form-title">نظر شما:</label>
+                  <textarea
+                    className="comment-fotm-text"
+                    name="comment"
+                    id="comment-input"
+                    value={this.state.commentText}
+                    onChange={e => {
+                      this.setState({commentText: e.target.value});
+                    }}
+                  ></textarea>
+                  <button className="btn">ثبت نظر</button>
+                </form>
+              </section>
+            )
+          }
         </main>
         <Footer />
       </div>
     )
   }
 }
+
+PostSingle.contextType = I18nContext;
+
+export default PostSingle
