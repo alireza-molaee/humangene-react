@@ -4,9 +4,15 @@ import logo from '../assets/logo.png';
 import { getHeaderItems } from '../utils/api';
 import LoaddingPage from './LoaddingPage';
 import HeaderAuth from './HeaderAuth';
+import { I18nContext } from '../i18n';
+
+import langFaIcon from '../assets/lang-fa-icon.svg';
+import langEnIcon from '../assets/lang-en-icon.svg';
 
 
 export default class Header extends React.Component {
+
+  static contextType = I18nContext;
 
   constructor(props) {
     super(props);
@@ -19,6 +25,7 @@ export default class Header extends React.Component {
     this.onScroll = this.onScroll.bind(this);
     this.renderPageLinks = this.renderPageLinks.bind(this);
     this.handleClickOnHamburgerBtn = this.handleClickOnHamburgerBtn.bind(this);
+    this.lang = localStorage.getItem("lang");
   }
 
   componentDidMount() {
@@ -41,6 +48,11 @@ export default class Header extends React.Component {
     if (this.props.isSticky) {
       window.removeEventListener('scroll', this.onScroll);
     }
+  }
+
+  changeLang(lang) {
+    localStorage.setItem("lang", lang);
+    window.location.reload();
   }
 
   onScroll() {
@@ -135,24 +147,28 @@ export default class Header extends React.Component {
               </div>
               <HeaderAuth onClickLogin={this.props.onClickLogin} onClickRegister={this.props.onClickRegister} />
               <nav className="header__nav-bar">
-                <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
-                <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">سرویس جستجو</NavLink>                
+                <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">{this.context.home}</NavLink>
+                <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">{this.context.searchService}</NavLink>                
                 {this.renderPageLinks()}
-                <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
-                <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
-                <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
+                <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">{this.context.news}</NavLink>
+                <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">{this.context.aboutUs}</NavLink>
+                <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">{this.context.contactUs}</NavLink>
+                {this.lang !== "fa" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("fa")}><img src={langFaIcon} /></button>}
+                {this.lang !== "en" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("en")}><img src={langEnIcon} /></button>}
               </nav>
             </div>
           </div>
           <div className={this.state.menuIsOpen ? "hamburger-menu-wrapper open" : "hamburger-menu-wrapper"}>
             <div className="hamburger-menu">
               <nav className="header__nav-bar--vertical">
-                  <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">خانه</NavLink>
-                  <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">سرویس جستجو</NavLink>                
+                  <NavLink className="header__nav-bar__item" to="/" exact activeClassName="active">{this.context.home}</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/search" activeClassName="active">{this.context.searchService}</NavLink>                
                   {this.renderPageLinks()}
-                  <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">اخبار</NavLink>
-                  <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">درباره ما</NavLink>
-                  <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">تماس با ما</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/news" activeClassName="active">{this.context.news}</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/about-us" activeClassName="active">{this.context.aboutUs}</NavLink>
+                  <NavLink className="header__nav-bar__item" to="/contact-us" exact activeClassName="active">{this.context.contactUs}</NavLink>
+                  {this.lang !== "fa" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("fa")}><img src={langFaIcon} /></button>}
+                  {this.lang !== "en" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("en")}><img src={langEnIcon} /></button>}
                 </nav>
             </div>
           </div>
@@ -167,12 +183,14 @@ export default class Header extends React.Component {
                 <div className="header__right_wrapper">
                   <HeaderAuth onClickLogin={this.props.onClickLogin} />
                   <nav className="header__nav-bar--first-view">
-                    <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">خانه</NavLink>
-                    <NavLink className="header__nav-bar__item--first-view" to="/search" activeClassName="active">سرویس جستجو</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/" activeClassName="active">{this.context.home}</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/search" activeClassName="active">{this.context.searchService}</NavLink>
                     {this.renderPageLinksFirstView()}
-                    <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">اخبار</NavLink>
-                    <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">درباره ما</NavLink>
-                    <NavLink className="header__nav-bar__item--first-view" to="/contact-us" activeClassName="active">تماس با ما</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/news" activeClassName="active">{this.context.news}</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/about-us" activeClassName="active">{this.context.aboutUs}</NavLink>
+                    <NavLink className="header__nav-bar__item--first-view" to="/contact-us" activeClassName="active">{this.context.contactUs}</NavLink>
+                    {this.lang !== "fa" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("fa")}><img src={langFaIcon} /></button>}
+                    {this.lang !== "en" && <button className="header__nav-bar__change-labguage-btn" onClick={() => this.changeLang("en")}><img src={langEnIcon} /></button>}
                   </nav>
                 </div>
               </div>

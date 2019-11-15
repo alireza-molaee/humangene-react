@@ -10,13 +10,11 @@ import Footer from '../components/Footer';
 import LoaddingPage from '../components/LoaddingPage'
 import { Link } from 'react-router-dom';
 import { getHomeData } from '../utils/api'
-
-
-const aboutSummeryText = `
-شرکت هومن ژن پارس، از سال ۱۳۹۵ تحت عنوان مرکز خدمات امیکس شریف (مستقر در دانشگاه صنعتی شریف) توسط جمعی از متخصصین بایوانفورماتیک، بیوشیمی و ژنتیک فعالیت خود را در زمینه ارائه خدمات تحلیل داده‌های حجیم زیستی و توالی یابی نسل جدید آغاز نموده است. این مرکز در حال حاضر در حال پیاده‌سازی سیستم جامع ذخیره و تحلیل داده‌های زیستی برای کاربران تخصصی از جمله دانشجویان، مراکز تحقیقاتی و آزمایشگاه ها و پزشکان حوزه ژنتیک است که نمونه پیش صنعتی این محصول آماده بهره‌برداری می‌باشد.
-`
+import { I18nContext } from '../i18n';
 
 export default class Home extends Component {
+
+  static contextType = I18nContext;
 
   constructor(props) {
     super(props);
@@ -65,6 +63,7 @@ export default class Home extends Component {
   }
   
   render() {
+    const i18n = this.context;
 
     if (this.state.isLoadding) {
       return (
@@ -94,24 +93,24 @@ export default class Home extends Component {
           </div>
         </section>
         <section className="service-section container-fluid">
-          <SectionHeader>خدمات ما</SectionHeader>
+          <SectionHeader>{i18n.ourService}</SectionHeader>
           <div className="row around-xs">
             {renderedServices}
           </div>
         </section>
         <section className="about-section container-fluid">
-          <SectionHeader secondary>هومن ژن پارس</SectionHeader>
+          <SectionHeader secondary>{i18n.humangen}</SectionHeader>
           <div className="container">
             <p className="about-section__text">
-              {aboutSummeryText}
+              {i18n.aboutHumangen}
             </p>
             <div className="about-section__button-wrapper">
-              <Link to="/about-us" className="about-section__button btn btn--secondary">بیشتر بدانید</Link>
+              <Link to="/about-us" className="about-section__button btn btn--secondary">{i18n.learnMore}</Link>
             </div>
           </div>
         </section>
         <section className="companies-section container-fluid">
-          <SectionHeader>همکاران ما</SectionHeader>
+          <SectionHeader>{i18n.ourPartner}</SectionHeader>
           <div>
             <CompanyList companies={this.state.companies} />
           </div>

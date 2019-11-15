@@ -7,9 +7,12 @@ import { ScaleLoader } from 'react-spinners';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { queryForSearch } from '../utils/api';
 import { Bar } from 'react-chartjs-2';
+import { I18nContext } from "../i18n";
 
 
 export default class Search extends Component {
+
+  static contextType = I18nContext;
 
   constructor(props) {
     super(props);
@@ -132,19 +135,21 @@ export default class Search extends Component {
   
   render() {
 
+    const i18n = this.context;
+
     return (
       <div id="search-page">
         <Helmet>
             <title>Search</title>
         </Helmet>
         <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
-        <Hero>جستجو</Hero>
+        <Hero>{i18n.search}</Hero>
         <main className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-6 search-input-group">
                 <input
                   type="text"
-                  placeholder="جستجو..."
+                  placeholder={`${i18n.search}...`}
                   name="searchTerm"
                   value={this.state.searchTerm}
                   onChange={e => {this.setState({searchTerm: e.target.value})}}

@@ -7,86 +7,11 @@ import PostListItem from '../components/PostListItem';
 import Hero from '../components/Hero';
 import LoaddingPageInternal from '../components/LoaddingPageInternal'
 import { getPostList } from '../utils/api';
-
-// const posts = [
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/200/300?random=1',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/180/200?random=2',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/230/310?random=3',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/300/300?random=4',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/400/700?random=5',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/220/290?random=6',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/200/300?random=7',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/300/200?random=8',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/250/310?random=9',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/400/500?random=10',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/400/200?random=11',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/220/320?random=12',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/300/520?random=13',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/200/320?random=14',
-//     category: 'موضوع'
-//   },
-//   {
-//     title: 'پست ۱',
-//     image: 'https://picsum.photos/200/400?random=15',
-//     category: 'موضوع'
-//   },
-// ]
+import { I18nContext } from '../i18n';
 
 export default class PostList extends Component {
+
+  static contextType = I18nContext;
 
   constructor(props) {
     super(props);
@@ -123,6 +48,8 @@ export default class PostList extends Component {
   
   render() {
 
+    const i18n = this.context;
+
     if (this.state.isLoadding) {
       return (
         <div id="post-list-page">
@@ -140,7 +67,7 @@ export default class PostList extends Component {
             <title>PostList</title>
         </Helmet>
         <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
-        <Hero>اخبار</Hero>
+        <Hero>{i18n.news}</Hero>
         <main>
           <StackGrid
             gridRef={grid => this.grid = grid}

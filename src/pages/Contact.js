@@ -8,33 +8,36 @@ import renderHTML from 'react-render-html';
 import { Formik } from 'formik';
 import { postContactForm } from '../utils/api';
 import { toast } from 'react-toastify';
-
-const contact = {
-  address: `تهران ، خیابان حبیب‌الهی، خیابان شهید قاسمی، خیابان <br /> گلستان، بن‌بست گل، پلاک چهارم، طبقه‌ی دوم، واحد پنجم`,
-  telephone: '66033184-021',
-  postalcode: '1459973761',
-  email: 'info@humangene.ir',
-}
+import { I18nContext } from '../i18n';
 
 export default class Contact extends Component {
+
+  static contextType = I18nContext;
 
   handleSubmitForm(values, { setSubmitting, resetForm }) {
     postContactForm(values)
     .then(() => {
       setSubmitting(false);
       resetForm();
-      toast.success('پیام شما با موفقیت ارسال شد.')
+      toast.success(this.context.yourMessageSendSuccess)
     })
   }
 
   render() {
+    const i18n = this.context;
+    const contact = {
+      address: i18n.vAddress,
+      telephone: '66033184-021',
+      postalcode: '1459973761',
+      email: 'info@humangene.ir',
+    }
     return (
       <div id="contact-page">
         <Helmet>
             <title>Contact</title>
         </Helmet>
         <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
-        <Hero>تماس با ما</Hero>
+        <Hero>{i18n.contactUs}</Hero>
         <main className="container">
           <div className="row">
             <div className="col-md-6">
@@ -55,7 +58,7 @@ export default class Contact extends Component {
                       type="text"
                       className="input-text"
                       name="name"
-                      placeholder="نام شما"
+                      placeholder={i18n.yourName}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.name}
@@ -67,7 +70,7 @@ export default class Contact extends Component {
                       type="email"
                       className="input-text"
                       name="email"
-                      placeholder="ایمیل شما"
+                      placeholder={i18n.yourEmail}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.email}
@@ -78,7 +81,7 @@ export default class Contact extends Component {
                     <textarea
                       className="input-textarea"
                       name="text"
-                      placeholder="متن پیام"
+                      placeholder={i18n.text}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.text}
@@ -86,7 +89,7 @@ export default class Contact extends Component {
                     <div className="input-icon"><FontAwesomeIcon icon="pen" /></div>
                   </div>
                   <div className="form-btn-wrapper">
-                    <button className="btn btn--md" type="submit" disabled={isSubmitting}>ارسال</button>
+                    <button className="btn btn--md" type="submit" disabled={isSubmitting}>{i18n.send}</button>
                   </div>
                 </form>
               )}
@@ -95,19 +98,19 @@ export default class Contact extends Component {
             <div className="col-md-6">
               <div className="contact-detail">
                 <p className="contact-detail__item">
-                <strong><FontAwesomeIcon icon="map-marked" />&nbsp;آدرس:&nbsp;</strong>
+                <strong><FontAwesomeIcon icon="map-marked" />&nbsp;{i18n.address}:&nbsp;</strong>
                   {renderHTML(contact.address)}
                 </p>
                 <p className="contact-detail__item">
-                  <strong><FontAwesomeIcon icon="phone" />&nbsp;تلفن:&nbsp;</strong>
+                  <strong><FontAwesomeIcon icon="phone" />&nbsp;{i18n.phone}:&nbsp;</strong>
                   {contact.telephone}
                 </p>
                 <p className="contact-detail__item">
-                  <strong><FontAwesomeIcon icon="envelope-square" />&nbsp;کد پستی:&nbsp;</strong>
+                  <strong><FontAwesomeIcon icon="envelope-square" />&nbsp;{i18n.postalCode}:&nbsp;</strong>
                   {contact.postalcode}
                 </p>
                 <p className="contact-detail__item">
-                  <strong><FontAwesomeIcon icon="at" />&nbsp;ایمیل:&nbsp;</strong>
+                  <strong><FontAwesomeIcon icon="at" />&nbsp;{i18n.email}:&nbsp;</strong>
                   {contact.email}
                 </p>
               </div>

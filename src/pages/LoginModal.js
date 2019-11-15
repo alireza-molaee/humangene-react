@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import logoPng from '../assets/logor.png'
 import { login } from '../utils/api';
 import * as auth from '../utils/auth';
+import { I18nContext } from '../i18n';
 
 export default class LoginModal extends Component {
+
+    static contextType = I18nContext
 
     constructor(props) {
         super(props);
@@ -48,6 +51,8 @@ export default class LoginModal extends Component {
     }
 
     render() {
+        const i18n = this.context;
+
         return (
             <div className="modal" style={{display: this.props.show ? 'block' : 'none'}}>
                 <span onClick={() => {this.props.onClose()}} className="close" title="Close Modal">&times;</span>
@@ -59,21 +64,21 @@ export default class LoginModal extends Component {
                     <div className="row">
                         {this.state.validationErrors.message && <div className="col-xs-12"><p style={{color: 'red', direction: 'rtl', fontSize: '14px', marginBottom: '15px'}}>{this.state.validationErrors.message}</p></div>}
                         <div className={this.state.validationErrors.email ? "col-xs-12 form-group invalid" : "col-xs-12 form-group"}>
-                            <label htmlFor="uname"><b>نام کاربری (ایمیل)</b></label>
+                            <label htmlFor="uname"><b>{i18n.uname}</b></label>
                             {this.state.validationErrors.email && (<span className="error-message">{this.state.validationErrors.firstName}</span>)}                            
-                            <input type="text" value={this.state.username} onChange={this.handleInputChange} placeholder="نام کاربری خود را وارد کنید" name="username" required />
+                            <input type="text" value={this.state.username} onChange={this.handleInputChange} placeholder={i18n.unamePlaceholder} name="username" required />
                         </div>
 
                         <div className={this.state.validationErrors.password ? "col-xs-12 form-group invalid" : "col-xs-12 form-group"}>
-                            <label htmlFor="psw"><b>رمز عبور</b></label>
+                            <label htmlFor="psw"><b>{i18n.psw}</b></label>
                             {this.state.validationErrors.password && (<span className="error-message">{this.state.validationErrors.firstName}</span>)}                            
-                            <input type="password" value={this.state.password} onChange={this.handleInputChange} placeholder="رمز عبور را وارد کنید" name="password" required />
+                            <input type="password" value={this.state.password} onChange={this.handleInputChange} placeholder={i18n.pswPlaceholder} name="password" required />
                         </div>
 
                         <div className="col-xs-12 btn-container">
-                            <button className="btn" type="submit">ورود</button>
+                            <button className="btn" type="submit">{i18n.signIn}</button>
                                 <span>&nbsp;</span>
-                            <button className="btn btn--secondary" onClick={() => {this.props.onClose()}} type="button">انصراف</button>
+                            <button className="btn btn--secondary" onClick={() => {this.props.onClose()}} type="button">{i18n.cancel}</button>
                         </div>
                     </div>
                 </form>

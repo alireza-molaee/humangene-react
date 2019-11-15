@@ -7,14 +7,12 @@ import Member from '../components/Member';
 import SectionHeader from '../components/SectionHeader';
 import LoaddingPageInternal from '../components/LoaddingPageInternal';
 import { getMemberData } from '../utils/api';
+import { I18nContext } from '../i18n';
 
-
-const aboutText = `
-شرکت هومن ژن پارس، از سال ۱۳۹۵ تحت عنوان مرکز خدمات امیکس شریف (مستقر در دانشگاه صنعتی شریف) توسط جمعی از متخصصین بایوانفورماتیک، بیوشیمی و ژنتیک فعالیت خود را در زمینه ارائه خدمات تحلیل داده‌های حجیم زیستی و توالی یابی نسل جدید آغاز نموده است. این مرکز در حال حاضر در حال پیاده‌سازی سیستم جامع ذخیره و تحلیل داده‌های زیستی برای کاربران تخصصی از جمله دانشجویان، مراکز تحقیقاتی و آزمایشگاه ها و پزشکان حوزه ژنتیک است که نمونه پیش صنعتی این محصول آماده بهره‌برداری می‌باشد.
-
-`
 
 export default class About extends Component {
+
+  static contextType = I18nContext;
 
   constructor(props) {
     super(props);
@@ -49,6 +47,7 @@ export default class About extends Component {
   }
   
   render() {
+    const i18n = this.context;
 
     if (this.state.isLoadding) {
       return (
@@ -67,12 +66,12 @@ export default class About extends Component {
             <title>About Us</title>
         </Helmet>
         <Header onClickLogin={() => {this.props.openLoginModal()}} onClickRegister={() => {this.props.openRegisterModal()}} />
-        <Hero>درباره ما</Hero>
+        <Hero>{i18n.aboutUs}</Hero>
         <main className="container">
           <p className="text">
-            {aboutText}
+            {i18n.aboutHumangen}
           </p>
-          <SectionHeader>اعضای شرکت</SectionHeader>
+          <SectionHeader>{i18n.members}</SectionHeader>
           <div className="row">
             {this.renderMembers()}
           </div>

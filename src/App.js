@@ -16,8 +16,10 @@ function App() {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
 
+  const lang = localStorage.getItem("lang") || 'fa';
+
   return (
-    <I18n lang="fa">
+    <I18n lang={lang}>
       <div className="App">
         <Helmet>
           <title>Human Gene</title>

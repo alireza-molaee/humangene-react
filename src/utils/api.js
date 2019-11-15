@@ -2,8 +2,10 @@ import axios from 'axios';
 import * as auth from './auth';
 import * as moment from 'moment-jalaali';
 
+const langKey = localStorage.getItem("lang") || 'fa';
+
 const ajaxJson = axios.create({
-  baseURL: process.env.REACT_APP_BASE_API_URL,
+  baseURL: process.env.REACT_APP_BASE_API_URL + '/' + langKey,
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' }
 });
@@ -20,7 +22,7 @@ export function getCategories() {
     .then(res => {
       return res.data.map(item => ({
         id: item['id'],
-        title: item['text_fa'],
+        title: item['text'],
       }));
     });
 }
@@ -30,7 +32,7 @@ export function getPages() {
     .then(res => {
       return res.data.map(item => ({
         id: item['id'],
-        title: item['title_fa'],
+        title: item['title'],
         category: item['category']
       }))
     });
@@ -75,9 +77,9 @@ export function getArticleDetail(id) {
     .then(res => {
       return {
         id: res.data['id'],
-        title: res.data['title_fa'],
+        title: res.data['title'],
         image: res.data['image'],
-        content: res.data['text_fa'],
+        content: res.data['text'],
         createdAt: res.data['published_date'] || new Date(),
         categoryId: res.data['category'],
       };
@@ -90,7 +92,7 @@ export function getPostList() {
     return res.data.map(item => {
       return {
         id: item['id'],
-        title: item['title_fa'],
+        title: item['title'],
         image: item['image'],
         category: item['category'],
       }
@@ -103,9 +105,9 @@ export function getPostSingle(id) {
   .then(res => {
     return {
       id: res.data['id'],
-      title: res.data['title_fa'],
+      title: res.data['title'],
       image: res.data['image'],
-      description: res.data['text_fa'],
+      description: res.data['text'],
       createAt: new Date(res.data['published_date']),
     }
   })
@@ -185,7 +187,7 @@ export function getSlids() {
     }
     return res.data[0].items.map(item => ({
       image: item['image'],
-      title: item['text_fa'],
+      title: item['text'],
       description: '',
       link: item['url'],
     }));
